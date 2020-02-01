@@ -1,0 +1,37 @@
+# https://github.com/GerritCodeReview/docker-gerrit
+version: '3'
+
+services:
+  gerrit:
+    image: gerritcodereview/gerrit
+    depends_on:
+       - ldap
+    volumes:
+       - /Users/kuroy/personal_workspace/data-ops-tmp/gerrit/etc:/var/gerrit/etc
+       - /Users/kuroy/personal_workspace/data-ops-tmp/gerrit/git:/var/gerrit/git
+       - /Users/kuroy/personal_workspace/data-ops-tmp/gerrit/db:/var/gerrit/db
+       - /Users/kuroy/personal_workspace/data-ops-tmp/gerrit/index:/var/gerrit/index
+       - /Users/kuroy/personal_workspace/data-ops-tmp/gerrit/cache:/var/gerrit/cache
+    ports:
+       - "29418:29418"
+       - "9080:8080"
+    environment:
+       - CANONICAL_WEB_URL=http://localhost
+        #entrypoint: /entrypoint.sh init
+  ldap:
+    image: osixia/openldap
+    ports:
+      - "389:389"
+      - "636:636"
+    environment:
+      - LDAP_ADMIN_PASSWORD=secret
+    volumes:
+      - /Users/kuroy/personal_workspace/data-ops-tmp/gerrit/ldap/var:/var/lib/ldap
+      - /Users/kuroy/personal_workspace/data-ops-tmp/gerrit/ldap/etc:/etc/ldap/slapd.d
+
+  ldap-admin:
+    image: osixia/phpldapadmin
+    ports:
+      - "6443:443"
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=ldap

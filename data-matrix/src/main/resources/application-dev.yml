@@ -1,0 +1,26 @@
+# ===================================================================
+# SPRING BOOT PROPERTIES FOR DEV ENV.
+#
+# ===================================================================
+# ----------------------------------------
+# ENABLE/DISABLE scheduled tasks
+# ----------------------------------------
+
+scheduling:
+  enabled: true
+
+spring:
+  datasource:
+    driverClass: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/data_matrix?serverTimezone=UTC
+    username: neo
+    password: trinity@123
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: create
+      show-sql: true
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+

@@ -1,0 +1,66 @@
+# ===================================================================
+# COMMON SPRING BOOT PROPERTIES
+#               
+# ===================================================================
+
+# ----------------------------------------
+# CORE PROPERTIES
+# ----------------------------------------
+
+logging:
+  config: classpath:log4j2.xml
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type: TRACE
+
+
+# ----------------------------------------
+# IDENTITY (ContextIdApplicationContextInitializer)
+# ----------------------------------------
+
+spring:
+  application:
+    name: Data-Matrix
+  banner:
+    charset: UTF-8
+    location: classpath:banner.txt
+
+  # ----------------------------------------
+  # ENVIRONMENT (dev/prod)
+  # modify here to switch between environments
+  # ----------------------------------------
+
+  profiles:
+    active: @activeProfile@
+
+  # ----------------------------------------
+  # JMX
+  # ----------------------------------------
+
+  jmx:
+    default-domain: data-matrixJMX
+
+  # ----------------------------------------
+  # Application
+  # ----------------------------------------
+retry:
+  delay: 5000
+
+
+  # ----------------------------------------
+  # ACTUATOR
+  # ----------------------------------------
+
+management:
+  health:
+    db:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
