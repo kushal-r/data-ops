@@ -1,4 +1,4 @@
-package com.criticalmass.datamatrix.repository;
+package com.criticalmass.datamatrix.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -10,4 +10,4 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories
 @EnableJpaAuditing
-public class AuditorConfig {}
+public class JPAAuditorConfiguration {}
