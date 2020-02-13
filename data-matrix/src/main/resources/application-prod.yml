@@ -1,8 +1,7 @@
 # ===================================================================
-# COMMON SPRING BOOT PROPERTIES FOR PAZ ENV.
-#                                   
+# SPRING BOOT PROPERTIES FOR PROD ENV.
+#
 # ===================================================================
-
 # ----------------------------------------
 # ENABLE/DISABLE scheduled tasks
 # ----------------------------------------
@@ -11,6 +10,10 @@ scheduling:
   enabled: true
 
 spring:
+  batch:
+    initializeDB: false
+    job:
+      enabled: false
   datasource:
     driverClass: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/data_matrix?serverTimezone=UTC

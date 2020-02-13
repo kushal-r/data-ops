@@ -26,5 +26,4 @@ spring:
       ddl-auto: none
       show-sql: true
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
+      dialect: org.hibernate.dialect.MySQL8Dialect

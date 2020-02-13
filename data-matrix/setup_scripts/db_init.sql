@@ -1,3 +1,4 @@
+-- create the users for each database
 CREATE USER 'neo'@'localhost' IDENTIFIED BY 'trinity@123';
 
 GRANT ALL PRIVILEGES ON *.* TO 'neo'@'localhost' WITH GRANT OPTION;
@@ -8,6 +9,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'neo'@'%' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
 
-create database data_matrix;
+-- create the databases
+CREATE DATABASE IF NOT EXISTS data_matrix;
 
 

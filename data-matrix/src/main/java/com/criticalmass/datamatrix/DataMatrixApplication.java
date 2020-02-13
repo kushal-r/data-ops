@@ -18,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DataMatrixApplication implements CommandLineRunner {
 
   private static final Logger log = LogManager.getLogger();
+
   @Resource JobLauncher jobLauncher;
 
   @Resource JobOperator jobOperator;
