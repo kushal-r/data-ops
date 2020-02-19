@@ -16,7 +16,7 @@ spring:
       enabled: false
   datasource:
     driverClass: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/data_matrix?serverTimezone=UTC
+    url: jdbc:mysql://127.1.1.1:3306/data_matrix?serverTimezone=UTC
     username: neo
     password: trinity@123
     testWhileIdle: true

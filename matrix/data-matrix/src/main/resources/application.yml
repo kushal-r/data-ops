@@ -43,6 +43,14 @@ spring:
     default-domain: data-matrixJMX
 
   # ----------------------------------------
+  # EHCache
+  # ----------------------------------------
+
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+
+  # ----------------------------------------
   # Application
   # ----------------------------------------
 retry:
