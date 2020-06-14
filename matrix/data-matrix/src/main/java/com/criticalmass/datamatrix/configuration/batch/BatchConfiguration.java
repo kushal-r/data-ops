@@ -22,25 +22,25 @@ import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.transaction.PlatformTransactionManager;
 
-/** @author kushal */
+/**
+ * @author kushal
+ */
 @Configuration
 @EnableBatchProcessing
 public class BatchConfiguration {
 
+  @Autowired
+  JobRegistry jobRegistry;
   @Value("classpath:org/springframework/batch/core/schema-drop-mysql.sql")
   private Resource batchDropSchema;
-
   @Value("classpath:org/springframework/batch/core/schema-mysql.sql")
   private Resource batchCreateSchema;
-
   @Value("${spring.batch.initializeDB}")
   private boolean isInitializerEnabled;
 
-  @Autowired private DataSource dataSource;
-
   // @Autowired JobExplorer jobExplorer;
-
-  @Autowired JobRegistry jobRegistry;
+  @Autowired
+  private DataSource dataSource;
 
   @Bean
   public DataSourceInitializer dataSourceInitializer() {

@@ -16,17 +16,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/** @author kushal */
+/**
+ * @author kushal
+ */
 @Configuration
 public class BatchJobConfiguration {
 
   private static final Logger log = LogManager.getLogger();
 
-  @Autowired private JobBuilderFactory jobBuilderFactory;
+  @Autowired
+  private JobBuilderFactory jobBuilderFactory;
 
-  @Autowired private StepBuilderFactory stepBuilderFactory;
+  @Autowired
+  private StepBuilderFactory stepBuilderFactory;
 
-  @Autowired private JobRegistry jobRegistry;
+  @Autowired
+  private JobRegistry jobRegistry;
 
   @Bean(value = "sampleTestJob")
   public Job sampleTestJob() throws DuplicateJobException {

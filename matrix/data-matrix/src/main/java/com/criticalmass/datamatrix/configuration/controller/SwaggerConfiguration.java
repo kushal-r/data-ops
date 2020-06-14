@@ -13,25 +13,26 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-/** @author Kushal Roy */
+/**
+ * Date: 13/06/20
+ *
+ * @author Kushal Roy
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration implements WebMvcConfigurer {
 
   @Bean
   public Docket userAPI() {
-
     return new Docket(DocumentationType.SWAGGER_2)
         .select()
         .apis(RequestHandlerSelectors.basePackage("com.criticalmass.datamatrix.controller"))
         .paths(PathSelectors.regex("/api/.*"))
         .build()
         .apiInfo(metaInfo());
-    // .apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build().apiInfo(metaInfo());
   }
 
   private ApiInfo metaInfo() {
-
     return new ApiInfoBuilder()
         .title("Artifact Deployment Service")
         .description("Processing and Deployment of big data artifacts")
@@ -47,9 +48,6 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
         .addResourceHandler("swagger-ui.html**")
         .addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
 
-    /*
-     * registry.addResourceHandler("/**").addResourceLocations("classpath:/META-INF/resources/");
-     */
     registry
         .addResourceHandler("/webjars/**")
         .addResourceLocations("classpath:/META-INF/resources/webjars/");
