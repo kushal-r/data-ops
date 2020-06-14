@@ -14,9 +14,9 @@ spring:
   # ----------------------------------------
   # USE GSON AS DEFAULT FOR HTTP CONVERTER
   # ----------------------------------------
-  http:
-    converters:
-      preferred-json-mapper: gson
+  #http:
+  #  converters:
+  #    preferred-json-mapper: gson
   # ----------------------------------------
   # ADD EXTERNAL CONFIG FILES FROM CLASSPATH
   # https://docs.spring.io/spring-boot/docs/2.1.8.RELEASE/reference/html/boot-features-external-config.html
@@ -37,13 +37,12 @@ spring:
   datasource:
     continue-on-error: false
     generate-unique-name: true
-    jdbcUrl: jdbc:mysql://127.0.0.1:3306/data_matrix?serverTimezone=UTC
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/data_matrix
     username: neo
     password: trinity@123
     testWhileIdle: true
     validationQuery: SELECT 1
     hibernate:
-      #create, create-drop,update,none
       ddl-auto: update
       show-sql: true
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
@@ -52,27 +51,33 @@ spring:
   sentinel-datasource:
     continue-on-error: false
     generate-unique-name: true
-    jdbcUrl: jdbc:mysql://127.0.0.1:3308/sentinel?serverTimezone=UTC
+    jdbcUrl: jdbc:mysql://127.0.0.1:3308/sentinel
     username: neo
     password: morpheus@123
     testWhileIdle: true
     validationQuery: SELECT 1
-    hibernate:
-      #create, create-drop,update,none
-      ddl-auto: update
-      show-sql: true
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-      dialect: org.hibernate.dialect.MySQL8Dialect
-      generate_statistics: true
-
-  #Generic JPA Hibernate properties
-  jpa:
     hibernate:
       ddl-auto: none
       show-sql: true
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
       dialect: org.hibernate.dialect.MySQL8Dialect
       generate_statistics: true
+  matrix-datasource:
+    continue-on-error: true
+    generate-unique-name: true
+    jdbcUrl: jdbc:postgresql://127.0.0.1:5432/data_matrix
+    username: neo
+    password: trinity@123
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    hibernate:
+      # Hibernate ddl auto (create, create-drop, validate, update)
+      ddl-auto: update
+      show-sql: true
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      generate_statistics: true
+
   # ----------------------------------------
   # DEV TOOL CONFIGURATION
   # ----------------------------------------

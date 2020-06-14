@@ -5,13 +5,14 @@
   <cache alias="matrix_cache">
     <key-type>java.lang.String</key-type>
     <value-type>java.util.Map</value-type>
+
     <expiry>
       <ttl unit="seconds">900</ttl>
     </expiry>
 
     <listeners>
       <listener>
-        <class>com.criticalmass.datamatrix.configuration.CacheEventLogger</class>
+        <class>com.criticalmass.datamatrix.configuration.cache.CacheEventLogger</class>
         <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
         <event-ordering-mode>UNORDERED</event-ordering-mode>
         <events-to-fire-on>CREATED</events-to-fire-on>
@@ -23,6 +24,7 @@
       <heap unit="entries">1000</heap>
       <offheap unit="MB">100</offheap>
     </resources>
+
   </cache>
 
 </config>

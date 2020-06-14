@@ -1,4 +1,4 @@
-package com.criticalmass.datamatrix.configuration;
+package com.criticalmass.datamatrix.configuration.controller;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -23,9 +23,14 @@ logging:
 spring:
   application:
     name: Data-Matrix
+    admin:
+      enable: true
   banner:
     charset: UTF-8
     location: classpath:banner.txt
+    image:
+      margin: 3.0
+      width: 90.0
 
   # ----------------------------------------
   # ENVIRONMENT (dev/prod)
@@ -40,7 +45,7 @@ spring:
   # ----------------------------------------
 
   jmx:
-    default-domain: data-matrixJMX
+    default-domain: data-matrix
 
   # ----------------------------------------
   # EHCache
@@ -49,6 +54,17 @@ spring:
   cache:
     jcache:
       config: classpath:ehcache.xml
+
+  # ----------------------------------------
+  # JACKSON CONFIGURATION
+  # ----------------------------------------
+
+  jackson:
+    #This does no work with LocalDateTime/LocalDate - Need to use JSONConfiguration
+    date-format: yyyy-MM-dd'T'HH:mm:ss
+    time-zone: Asia/Kolkata
+    serialization:
+      write_dates_as_timestamps: false
 
   # ----------------------------------------
   # Application
@@ -62,12 +78,20 @@ retry:
   # ----------------------------------------
 
 management:
+  auditevents:
+    enabled: true
   health:
     db:
       enabled: true
+    diskspace:
+      enabled: true
+      threshold: 10MB
   endpoint:
     health:
+      enabled: true
       show-details: always
+    shutdown:
+      enabled: true
   endpoints:
     web:
       exposure:

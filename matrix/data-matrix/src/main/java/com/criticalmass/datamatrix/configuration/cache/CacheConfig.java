@@ -1,4 +1,4 @@
-package com.criticalmass.datamatrix.configuration;
+package com.criticalmass.datamatrix.configuration.cache;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;

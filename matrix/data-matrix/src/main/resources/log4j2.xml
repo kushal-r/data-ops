@@ -6,9 +6,9 @@
         pattern="%style{%d{ISO8601}}{magenta} %highlight{%-5level } [%style{%t}{bright,blue}]  %style{%C{1.}}{bright,yellow}: %msg%n%throwable"/>
     </Console>
 
-    <RollingFile name="RollingFile"
-      fileName="./logs/data-matrix/data-matrix.log"
-      filePattern="./logs/data-matrix/$${date:yyyy:MM}/data-matrix-%d{-dd-MMMM-yyyy}-%i.log.gz">
+    <RollingFile fileName="./logs/data-matrix/data-matrix.log"
+      filePattern="./logs/data-matrix/$${date:yyyy:MM}/data-matrix-%d{-dd-MMMM-yyyy}-%i.log.gz"
+      name="RollingFile">
       <PatternLayout>
         <pattern>%d %p %C{1.} [%t] %m%n</pattern>
       </PatternLayout>
@@ -23,13 +23,13 @@
 
   <Loggers>
     <!-- LOG everything at INFO level -->
+    <Logger level="info" name="*"/>
+
+    <!-- LOG "com.paypal*" at DEBUG level -->
     <Root level="info">
       <AppenderRef ref="Console"/>
       <AppenderRef ref="RollingFile"/>
     </Root>
-
-    <!-- LOG "com.paypal*" at DEBUG level -->
-    <Logger name="*" level="info"/>
   </Loggers>
 
 </Configuration>

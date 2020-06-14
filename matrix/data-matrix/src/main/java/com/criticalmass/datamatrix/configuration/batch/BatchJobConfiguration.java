@@ -1,4 +1,4 @@
-package com.criticalmass.datamatrix.configuration;
+package com.criticalmass.datamatrix.configuration.batch;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

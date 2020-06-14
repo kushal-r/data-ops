@@ -8,7 +8,11 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/** @author Kushal Roy */
+/**
+ * Date: 14/06/20
+ *
+ * @author Kushal Roy
+ */
 public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime> {
 
   @Override

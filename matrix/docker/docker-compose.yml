@@ -23,6 +23,8 @@ services:
       POSTGRES_PASSWORD: trinity@123
       #Database name
       POSTGRES_DB: data_matrix
+      #Timezone of Asia/Kolkata
+      TZ: Asia/Kolkata
     volumes:
       # Named volume
       - postgres-volume:/postgres/data
@@ -52,6 +54,7 @@ services:
       MYSQL_PASSWORD: trinity@123
       #Database name
       MYSQL_DATABASE: data_matrix
+      TZ: Asia/Kolkata
     volumes:
       # Named volume
       - batch_mysql-volume:/mysql/data
@@ -79,6 +82,7 @@ services:
       MYSQL_PASSWORD: morpheus@123
       #Database name
       MYSQL_DATABASE: sentinel
+      TZ: Asia/Kolkata
     volumes:
       # Named volume
       - sentinel_mysql-volume:/mysql/data

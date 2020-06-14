@@ -1,4 +1,4 @@
-package com.criticalmass.datamatrix.configuration;
+package com.criticalmass.datamatrix.configuration.batch;
 
 import javax.sql.DataSource;
 import org.springframework.batch.core.configuration.JobRegistry;

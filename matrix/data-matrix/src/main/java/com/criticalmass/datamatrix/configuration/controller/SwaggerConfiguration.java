@@ -1,5 +1,6 @@
-package com.criticalmass.datamatrix.configuration;
+package com.criticalmass.datamatrix.configuration.controller;
 
+import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -23,31 +24,31 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration implements WebMvcConfigurer {
 
   @Bean
-  public Docket userAPI() {
+  public Docket api() {
     return new Docket(DocumentationType.SWAGGER_2)
         .select()
-        .apis(RequestHandlerSelectors.basePackage("com.criticalmass.datamatrix.controller"))
-        .paths(PathSelectors.regex("/api/.*"))
-        .build()
+        .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+        .paths(PathSelectors.any())
+        .build().pathMapping("/")
         .apiInfo(metaInfo());
   }
 
+
   private ApiInfo metaInfo() {
     return new ApiInfoBuilder()
-        .title("Artifact Deployment Service")
-        .description("Processing and Deployment of big data artifacts")
+        .title("Sentinel Service")
+        .description("Stock market management api's")
         .contact(new Contact("Kushal", "", "kuroy@gmail.com"))
         .version("v1.0.0")
         .build();
   }
 
+
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
     registry
-        .addResourceHandler("swagger-ui.html**")
-        .addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
-
+        .addResourceHandler("/**")
+        .addResourceLocations("classpath:/META-INF/resources/");
     registry
         .addResourceHandler("/webjars/**")
         .addResourceLocations("classpath:/META-INF/resources/webjars/");
