@@ -29,7 +29,7 @@ public class SentinelController {
   /* ---------------- Fields ---------------- */
 
   @Resource
-  private CustomerService customerServiceImpl;
+  private CustomerService customerService;
 
 
   /* ---------------- Public api ---------------- */
@@ -42,7 +42,7 @@ public class SentinelController {
 
     return ResponseEntity.status(HttpStatus.OK)
         .contentType(MediaType.APPLICATION_JSON)
-        .body(customerServiceImpl.createNewCustomer(customer));
+        .body(customerService.createNewCustomer(customer));
   }
 
 
@@ -57,7 +57,7 @@ public class SentinelController {
   @PathVariable(value = "id", required = false) String id) {
     return ResponseEntity.status(HttpStatus.OK)
         .contentType(MediaType.APPLICATION_JSON)
-        .body(customerServiceImpl.findCustomer(id));
+        .body(customerService.findCustomer(id));
   }
 
 

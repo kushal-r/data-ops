@@ -28,7 +28,7 @@ spring:
   # ENABLE/DISABLE BATCH TASKS/BATCH TABLE INITIALIZATION
   # ----------------------------------------
   batch:
-    initializeDB: false
+    initializeDB: true
     job:
       enabled: false
   # ----------------------------------------
@@ -37,7 +37,7 @@ spring:
   datasource:
     continue-on-error: false
     generate-unique-name: true
-    jdbcUrl: jdbc:mysql://127.0.0.1:3306/data_matrix
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/data_matrix?serverTimezone=UTC&useLegacyDatetimeCode=false
     username: neo
     password: trinity@123
     testWhileIdle: true
@@ -51,13 +51,13 @@ spring:
   sentinel-datasource:
     continue-on-error: false
     generate-unique-name: true
-    jdbcUrl: jdbc:mysql://127.0.0.1:3308/sentinel
+    jdbcUrl: jdbc:mysql://127.0.0.1:3308/sentinel?serverTimezone=UTC&useLegacyDatetimeCode=false
     username: neo
     password: morpheus@123
     testWhileIdle: true
     validationQuery: SELECT 1
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
       show-sql: true
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
       dialect: org.hibernate.dialect.MySQL8Dialect

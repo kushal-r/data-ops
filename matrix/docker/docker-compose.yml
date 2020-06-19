@@ -2,17 +2,6 @@ version: "3.8"
 services:
   postgres:
     container_name: matrix_postgres
-    deploy:
-      mode: global
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-      update_config:
-        parallelism: 2
-        delay: 10s
-        order: stop-first
     image: postgres
     ports:
       - 5432:5432
@@ -24,7 +13,7 @@ services:
       #Database name
       POSTGRES_DB: data_matrix
       #Timezone of Asia/Kolkata
-      TZ: Asia/Kolkata
+      TZ: UTC
     volumes:
       # Named volume
       - postgres-volume:/postgres/data
@@ -32,17 +21,6 @@ services:
       - ~/tmp:/etc/postgres/data:ro
   batch_mysql:
     container_name: matrix_mysql_instance_1
-    deploy:
-      mode: global
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-      update_config:
-        parallelism: 2
-        delay: 10s
-        order: stop-first
     image: mysql
     ports:
       - 3306:3306
@@ -54,23 +32,12 @@ services:
       MYSQL_PASSWORD: trinity@123
       #Database name
       MYSQL_DATABASE: data_matrix
-      TZ: Asia/Kolkata
+      TZ: UTC
     volumes:
       # Named volume
       - batch_mysql-volume:/mysql/data
   sentinel_mysql:
     container_name: matrix_mysql_instance_2
-    deploy:
-      mode: global
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-      update_config:
-        parallelism: 2
-        delay: 10s
-        order: stop-first
     image: mysql
     ports:
       - 3308:3306
@@ -82,7 +49,7 @@ services:
       MYSQL_PASSWORD: morpheus@123
       #Database name
       MYSQL_DATABASE: sentinel
-      TZ: Asia/Kolkata
+      TZ: UTC
     volumes:
       # Named volume
       - sentinel_mysql-volume:/mysql/data
