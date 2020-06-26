@@ -10,9 +10,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.criticalmass.datamatrix.dto.sentinel.CustomerDTO;
 import com.criticalmass.datamatrix.entity.sentinel.Customer;
+import com.criticalmass.datamatrix.helper.converter.mapper.IEntityConverter;
 import com.criticalmass.datamatrix.repository.sentinel.CustomerRepository;
 import com.criticalmass.datamatrix.service.sentinel.CustomerService;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -45,6 +48,8 @@ public class SentinelControllerIntegrationTest {
   @MockBean
   private CustomerRepository customerRepository;
 
+  @MockBean
+  private IEntityConverter<CustomerDTO, Customer> customerConverter;
 
   @BeforeEach
   public void setUp() throws Exception {
@@ -61,6 +66,14 @@ public class SentinelControllerIntegrationTest {
     List<Customer> customerList = new ArrayList<>();
     customerList.add(customer);
 
+    CustomerDTO customerDTO = new CustomerDTO();
+    customerDTO.setContactNumber("+91 1234567890");
+    customerDTO.setDateOfBirth(LocalDate.of(1988, 10, 29));
+    customerDTO.setEmailId("test@gmail.com");
+    customerDTO.setUsername("test");
+
+    given(customerConverter.map(customer)).willReturn(customerDTO);
+
     given(customerService.findCustomer("12345678-1234-5678-1234-567812345678"))
         .willReturn(customerList);
 
@@ -69,7 +82,7 @@ public class SentinelControllerIntegrationTest {
         .andExpect(status().isOk())
         .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$", hasSize(1)))
-        .andExpect(jsonPath("$[0].username", is(customer.getUsername())));
+        .andExpect(jsonPath("$[0].username", is(customerDTO.getUsername())));
 
     verify(customerService, VerificationModeFactory.times(1))
         .findCustomer(customer.getId().toString());

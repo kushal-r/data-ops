@@ -28,7 +28,7 @@ spring:
   # ENABLE/DISABLE BATCH TASKS/BATCH TABLE INITIALIZATION
   # ----------------------------------------
   batch:
-    initializeDB: true
+    initializeDB: false
     job:
       enabled: false
   # ----------------------------------------
@@ -57,7 +57,7 @@ spring:
     testWhileIdle: true
     validationQuery: SELECT 1
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
       show-sql: true
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
       dialect: org.hibernate.dialect.MySQL8Dialect

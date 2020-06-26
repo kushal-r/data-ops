@@ -10,10 +10,13 @@
 logging:
   config: classpath:log4j2.xml
   level:
+    root: WARN
     org:
       hibernate:
         SQL: DEBUG
         type: TRACE
+      springframework:
+        web: DEBUG
 
 
 # ----------------------------------------

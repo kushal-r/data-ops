@@ -1,11 +1,14 @@
 package com.criticalmass.datamatrix.controller;
 
+import com.criticalmass.datamatrix.dto.sentinel.CustomerDTO;
 import com.criticalmass.datamatrix.entity.sentinel.Customer;
+import com.criticalmass.datamatrix.helper.converter.mapper.IEntityConverter;
 import com.criticalmass.datamatrix.service.sentinel.CustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import javax.annotation.Resource;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +31,11 @@ public class SentinelController {
 
   /* ---------------- Fields ---------------- */
 
-  @Resource
+  @Autowired
   private CustomerService customerService;
+
+  @Autowired
+  private IEntityConverter<CustomerDTO, Customer> customerConverter;
 
 
   /* ---------------- Public api ---------------- */
@@ -38,11 +44,11 @@ public class SentinelController {
       response = Customer.class, produces = "application/json", consumes = "application/json",
       tags = "Customer")
   @PostMapping(value = "/customer", consumes = "application/json", produces = "application/json")
-  public ResponseEntity<?> createNewCustomer(@RequestBody Customer customer) {
+  public ResponseEntity<?> createNewCustomer(@RequestBody CustomerDTO customerDTO) {
 
     return ResponseEntity.status(HttpStatus.OK)
         .contentType(MediaType.APPLICATION_JSON)
-        .body(customerService.createNewCustomer(customer));
+        .body(customerService.createNewCustomer(customerConverter.map(customerDTO)));
   }
 
 
@@ -57,7 +63,9 @@ public class SentinelController {
   @PathVariable(value = "id", required = false) String id) {
     return ResponseEntity.status(HttpStatus.OK)
         .contentType(MediaType.APPLICATION_JSON)
-        .body(customerService.findCustomer(id));
+        .body(customerService.findCustomer(id).parallelStream().map(x -> customerConverter.map(x))
+            .collect(
+                Collectors.toList()));
   }
 
 

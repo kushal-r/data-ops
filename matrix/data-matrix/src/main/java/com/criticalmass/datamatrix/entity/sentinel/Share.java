@@ -2,7 +2,6 @@ package com.criticalmass.datamatrix.entity.sentinel;
 
 import com.criticalmass.datamatrix.helper.converter.JsonToMapConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +34,7 @@ import org.springframework.validation.annotation.Validated;
 //@DynamicUpdate
 @Validated
 //@EntityListeners(AuditingEntityListener.class)
-public class Share implements Serializable {
+public class Share extends BaseEntity {
 
   @Id
   @GeneratedValue(generator = "uuid2")

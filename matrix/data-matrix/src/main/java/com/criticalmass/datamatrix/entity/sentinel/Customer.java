@@ -1,6 +1,6 @@
 package com.criticalmass.datamatrix.entity.sentinel;
 
-import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
@@ -31,7 +32,7 @@ import org.springframework.validation.annotation.Validated;
 @DynamicUpdate
 @Validated
 @EntityListeners(AuditingEntityListener.class)
-public class Customer implements Serializable {
+public class Customer extends BaseEntity {
 
   @Id
   @GeneratedValue(generator = "uuid2")
@@ -56,7 +57,17 @@ public class Customer implements Serializable {
   @NotEmpty(message = "Email is not valid")
   @Column(nullable = false, unique = true)
   @Email
-  private String email;
+  private String emailId;
+
+
+  @Column(nullable = false)
+  private LocalDate dateOfBirth;
+
+
+  @Column(nullable = false)
+  @Pattern(regexp = "^(\\+\\d{1,3}( )?)?((\\(\\d{1,3}\\))|\\d{1,3})[- .]?\\d{3,4}[- .]?\\d{4}$",
+      message = "Contact number is not valid. Contact number should be of format +00 1234567890")
+  private String contactNumber;
 
 
 /*  @Exclude

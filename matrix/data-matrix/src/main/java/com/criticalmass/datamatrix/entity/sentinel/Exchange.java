@@ -1,6 +1,5 @@
 package com.criticalmass.datamatrix.entity.sentinel;
 
-import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -22,7 +21,7 @@ import org.springframework.validation.annotation.Validated;
 //@DynamicUpdate
 @Validated
 //@EntityListeners(AuditingEntityListener.class)
-public class Exchange implements Serializable {
+public class Exchange extends BaseEntity {
 
   @Id
   @GeneratedValue(generator = "uuid2")

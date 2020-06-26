@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.criticalmass.datamatrix.entity.sentinel.Customer;
 import com.criticalmass.datamatrix.repository.sentinel.CustomerRepository;
+import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,11 @@ public class CustomerRepositoryIntegrationTest {
   public void whenFindByUsername_thenReturnCustomer() {
     Customer customer = new Customer();
     customer.setActive(true);
-    customer.setEmail("customerA@test.com");
+    customer.setEmailId("customerA@test.com");
     customer.setUsername("customerA");
     customer.setPassword("password");
+    customer.setContactNumber("+91 9686583137");
+    customer.setDateOfBirth(LocalDate.of(1988, 10, 1));
 
     //Save this in mock DB
     testEntityManager.persist(customer);

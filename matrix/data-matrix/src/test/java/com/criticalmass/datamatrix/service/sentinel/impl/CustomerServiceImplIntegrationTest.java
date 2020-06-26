@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
@@ -43,14 +45,23 @@ public class CustomerServiceImplIntegrationTest {
 
   @BeforeEach
   public void setUp() {
-    Customer customer = new Customer();
-    customer.setUsername("test_name");
-    customer.setId(UUID.fromString("12345678-1234-5678-1234-567812345678"));
-    List<Customer> customerList = new ArrayList<>();
-    customerList.add(customer);
+    Customer customer1 = new Customer();
+    customer1.setUsername("test_name1");
+    customer1.setId(UUID.fromString("12345678-1234-5678-1234-567812345678"));
+    Customer customer2 = new Customer();
+    customer2.setUsername("test_name2");
+    customer2.setId(UUID.fromString("12345678-1234-5678-1234-567812345699"));
 
-    Mockito.when(customerRepository.findById(customer.getId())).thenReturn(
-        Optional.of(customer));
+    List<Customer> customerList = new ArrayList<>();
+    customerList.add(customer1);
+    customerList.add(customer2);
+
+    Mockito.when(customerRepository.findById(customer1.getId())).thenReturn(
+        Optional.of(customer1));
+
+    Mockito.when(customerRepository.findAll(Sort.by(Direction.ASC, "username")))
+        .thenReturn(customerList);
+
   }
 
   /* ---------------- Test cases ---------------- */
@@ -59,7 +70,18 @@ public class CustomerServiceImplIntegrationTest {
   public void whenValidId_thenCustomerShouldBeFound() {
 
     List<Customer> customer = customerService.findCustomer("12345678-1234-5678-1234-567812345678");
-    Assertions.assertThat(customer.get(0).getUsername().equalsIgnoreCase("test_name"));
+    Assertions.assertTrue(customer.get(0).getUsername().equalsIgnoreCase("test_name1"));
+  }
+
+  @Test
+  public void whenBlankId_thenReturnAllCustomers() {
+    Customer customer1 = new Customer();
+    customer1.setUsername("test_name1");
+    customer1.setId(UUID.fromString("12345678-1234-5678-1234-567812345678"));
+
+    List<Customer> customers = customerService.findCustomer(null);
+    Assertions.assertTrue(customers.size() == 2);
+    Assertions.assertTrue(customers.get(0).equals(customer1));
   }
 
 

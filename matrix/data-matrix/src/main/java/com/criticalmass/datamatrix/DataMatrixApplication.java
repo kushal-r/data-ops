@@ -1,19 +1,18 @@
 package com.criticalmass.datamatrix;
 
-import com.criticalmass.datamatrix.repository.sentinel.CustomerRepository;
-import javax.annotation.Resource;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.boot.CommandLineRunner;
+import java.util.TimeZone;
+import javax.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@Transactional("sentinelTransactionManager")
-public class DataMatrixApplication implements CommandLineRunner {
+public class DataMatrixApplication {
 
-  private static final Logger log = LogManager.getLogger();
-
+  //Set UTC time zone for the application
+  @PostConstruct
+  void started() {
+    TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+  }
 
 /*  @Resource
   JobLauncher jobLauncher;
@@ -27,15 +26,10 @@ public class DataMatrixApplication implements CommandLineRunner {
   @Resource(name = "sampleTestJob")
   Job job;*/
 
-  @Resource
-  private CustomerRepository customerRepository;
-
   public static void main(String[] args) {
     SpringApplication.run(DataMatrixApplication.class, args);
   }
-
-  @Override
-  public void run(String... args) throws Exception {
+  
 
 /*    log.info(jobExplorer.getLastJobInstance(job.getName()));
 
@@ -57,5 +51,5 @@ public class DataMatrixApplication implements CommandLineRunner {
             new JobParametersBuilder().
                 getNextJobParameters(job)
                 .toJobParameters());*/
-  }
+
 }

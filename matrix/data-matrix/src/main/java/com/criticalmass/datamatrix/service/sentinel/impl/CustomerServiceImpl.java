@@ -41,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
     log.info("Find customer whose email id is : {}", emailId);
 
     Customer probe = new Customer();
-    probe.setEmail(emailId);
+    probe.setEmailId(emailId);
     return customerRepository.findOne(Example.of(probe))
         .orElseThrow(() -> new NoSuchElementException("Customer with email " + emailId
             + " not found in DB"));
